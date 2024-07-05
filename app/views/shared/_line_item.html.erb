@@ -1,0 +1,33 @@
+<table>
+  
+    <tr>
+      <th>Product Image</th>
+      <th>Product Name</th>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total</th>
+    </tr>
+  
+    <% @order.line_items.each do |line_item| %>
+      <% product = line_item.product %>
+      <tr>
+        <td><img src="<%= product.image_url %>" alt="<%= product.name %>" style="width: 100px;"></td>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= line_item.quantity %></td>
+        <td><%= humanized_money_with_symbol line_item.item_price_cents / 100 %></td>
+        <td><%= humanized_money_with_symbol (line_item.item_price_cents * line_item.quantity) / 100 %></td>
+      </tr>
+    <% end %>
+  
+    <tr>
+      <th colspan="5">Total Amount</th>
+      <th><%= humanized_money_with_symbol @order.total_cents / 100.0 %></th>
+    </tr>
+  
+      <tr>
+      <th colspan="3">Email: <%= @order.email %> </th>
+      </tr>
+
+</table>
