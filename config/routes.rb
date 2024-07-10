@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'categories/index'
-    get 'categories/new'
-    get 'categories/create'
-    get 'categories/destroy'
-  end
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
   get 'about', to: 'about#index'
   root to: 'products#index'
 
